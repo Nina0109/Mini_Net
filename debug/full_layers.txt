@@ -1,0 +1,11 @@
+0 <keras.engine.topology.InputLayer object at 0x7fa3c0220588>
+1 <keras.engine.training.Model object at 0x7fa2b1cfbbe0>
+2 <keras.layers.pooling.MaxPooling2D object at 0x7fa2b1c8e470>
+3 <keras.layers.convolutional.Conv2D object at 0x7fa2ae0ec518>
+4 <keras.layers.normalization.BatchNormalization object at 0x7fa29a3b0898>
+5 <keras.layers.core.Activation object at 0x7fa29a31fda0>
+6 <keras.layers.convolutional.Conv2D object at 0x7fa29a2bfdd8>
+7 <keras.engine.topology.InputLayer object at 0x7fa3597a8dd8>
+8 <keras.engine.topology.InputLayer object at 0x7fa3597a8c50>
+9 <keras.engine.topology.InputLayer object at 0x7fa3597a8c88>
+10 <thoracicloss.lossLayer object at 0x7fa29a2da6a0>
