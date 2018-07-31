@@ -38,3 +38,12 @@ DEBUG_PATH = os.path.join(PROJECT_ROOT,'debug')
 
 # Where we put all .jpg images
 IMAGE_BASE_PATH = '/workspace/data'
+
+
+disease2id = {'No Finding':0,'Atelectasis':1,'Cardiomegaly':2,
+	'Effusion':3,'Infiltrate':4,'Mass':5,'Nodule':6,'Pneumonia':7,
+	'Pneumothorax':8,'Consolidation':9,'Edema':10,'Emphysema':11,
+	'Fibrosis':12,'Pleural_Thickening':13,'Hernia':14,'Infiltration':4}
+
+
+CLASS_NUM = 2

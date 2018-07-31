@@ -7,6 +7,9 @@ import keras.backend as K
 from keras.engine.topology import Layer
 
 import tensorflow as tf
+import config as cfg
+
+class_num = cfg.CLASS_NUM
 
 class lossLayer(Layer):
     '''
@@ -39,7 +42,7 @@ class lossLayer(Layer):
       # self.thoracic_loss(x[0][:,:,:,0],x[1][:,0],x[2][:,0],x[3][:,0],lambda_bbox=self.lambda_bbox)
 
       for i in range(self.bs):
-        for j in range(14):
+        for j in range(class_num):
           loss += self.thoracic_loss(x[0][i,:,:,j],x[1][i,j],x[2][i,j],x[3][i,j],lambda_bbox=self.lambda_bbox)
       loss = loss/self.bs
       return loss

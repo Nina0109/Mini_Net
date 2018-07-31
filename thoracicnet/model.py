@@ -6,29 +6,34 @@ from keras.models import Model
 from keras.layers import MaxPooling2D,Conv2D,Input,BatchNormalization
 from keras.layers import Activation
 from keras.applications.inception_resnet_v2 import InceptionResNetV2
+from keras.applications.vgg16 import VGG16
 from keras import regularizers
 
 
 from thoracicnet.thoracicloss import lossLayer
 import numpy as np
 
+import config as cfg
+
 def thoracic_prob(input_img):
 	# input_img = Input(tensor=input_tensor, shape=input_shape)
-	x = InceptionResNetV2(include_top=False, weights='imagenet',input_shape=(512,512,3))(input_img)
+	x = VGG16(include_top=False, weights='imagenet',input_shape=(512,512,3))(input_img)
 	x = MaxPooling2D(pool_size=(2, 2),strides=(1,1),name='ps')(x)
-	x = Conv2D(512,(3,3),activation=None,name='conv1',kernel_regularizer=regularizers.l2(0.01))(x)
+	# x = Conv2D(512,(3,3),activation=None,name='conv1',kernel_regularizer=regularizers.l2(0.01))(x)
+	x = Conv2D(512,(3,3),activation=None,name='conv1')(x)
 	x = BatchNormalization(name='bn1')(x)
 	x = Activation('relu',name='relu1')(x)
-	class_num = 14
-	prob = Conv2D(class_num,(1,1),activation='sigmoid',name='conv2',kernel_regularizer=regularizers.l2(0.01))(x)
+	class_num = cfg.CLASS_NUM
+	# prob = Conv2D(class_num,(1,1),activation='sigmoid',name='conv2',kernel_regularizer=regularizers.l2(0.01))(x)
+	prob = Conv2D(class_num,(1,1),activation='sigmoid',name='conv2')(x)
 	# a normalization left
 	return prob
 
 def thoracic_model(batch_size):
 	img_input = Input(shape=(512,512,3))
-	eta_input = Input(shape=(14,))
-	p_input = Input(shape=(14,))
-	bbox_input = Input(shape=(14,4))
+	eta_input = Input(shape=(cfg.CLASS_NUM,))
+	p_input = Input(shape=(cfg.CLASS_NUM,))
+	bbox_input = Input(shape=(cfg.CLASS_NUM,4))
 
 
 	y_pred = thoracic_prob(img_input)

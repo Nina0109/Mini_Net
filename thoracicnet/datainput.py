@@ -5,7 +5,10 @@ import os
 from random import shuffle
 from PIL import Image
 
-INPUT_SCALE = 512
+import config as cfg
+
+input_scale = cfg.INPUT_SCALE
+class_num = cfg.CLASS_NUM
 
 def read_img(path,target_size):
 	try:
@@ -46,14 +49,14 @@ def gen_all_inputs(d,training_sample,img_base_dir,num=1,random=False):
 		print(img_path)
 		# _img,w,h = read_img(img_path,(512,512))
 
-		res = read_img(img_path,(INPUT_SCALE,INPUT_SCALE))
+		res = read_img(img_path,(input_scale,input_scale))
 		if res is not False:
 			_img,w,h = res
 		
 			img.append(_img)
-			p.append(item['dl'])
-			eta.append(item['bbox'][0])
-			bbox.append(item['bbox'][1])
+			p.append(item['dl'][:2])
+			eta.append(item['bbox'][0][:2])
+			bbox.append(item['bbox'][1][:2])
 			count += 1		
 		else:
 			continue
@@ -85,13 +88,13 @@ def gen_batch_inputs(d,training_sample,img_base_dir,batch_size,random=False):
 			if not os.path.isfile(img_path):
 				continue
 			# _img,w,h = read_img(img_path,(512,512))
-			res = read_img(img_path,(INPUT_SCALE,INPUT_SCALE))
+			res = read_img(img_path,(input_scale,input_scale))
 			if res is not False:
 				_img,w,h = res
 				img.append(_img)
-				p.append(item['dl'])
-				eta.append(item['bbox'][0])
-				bbox.append(item['bbox'][1])
+				p.append(item['dl'][:2])
+				eta.append(item['bbox'][0][:2])
+				bbox.append(item['bbox'][1][:2])
 			else:
 				continue		
 
@@ -113,14 +116,14 @@ def gen_dummy_batch_inputs(batch_size,img_size):
 			r = np.random.randint(2)
 			if r==1:
 				_img = np.ones((1,img_size,img_size,3))*10
-				_p = [0,1,0,0,0,0,0,0,0,0,0,0,0,0]
-				_eta = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-				_bbox = [[-1]*4 for _ in range(14)]
+				_p = [0,1]
+				_eta = [0,0]
+				_bbox = [[-1]*4 for _ in range(class_num)]
 			else:
 				_img = np.ones((1,img_size,img_size,3))*5
-				_p = [1,0,0,0,0,0,0,0,0,0,0,0,0,0]
-				_eta = [1,0,0,0,0,0,0,0,0,0,0,0,0,0]
-				_bbox = [[0.5,0.1,0.5,0.1]]+[[-1]*4 for _ in range(13)]
+				_p = [1,0]
+				_eta = [1,0]
+				_bbox = [[0.5,0.1,0.5,0.1]]+[[-1]*4 for _ in range(class_num-1)]
 
 			img.append(_img)
 			p.append(_p)
