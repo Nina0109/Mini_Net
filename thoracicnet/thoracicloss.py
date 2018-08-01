@@ -7,7 +7,7 @@ import keras.backend as K
 from keras.engine.topology import Layer
 
 import tensorflow as tf
-import config as cfg
+import thoracicnet.config as cfg
 
 class_num = cfg.CLASS_NUM
 

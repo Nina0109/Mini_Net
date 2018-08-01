@@ -5,7 +5,7 @@ import os
 from random import shuffle
 from PIL import Image
 
-import config as cfg
+import thoracicnet.config as cfg
 
 input_scale = cfg.INPUT_SCALE
 class_num = cfg.CLASS_NUM

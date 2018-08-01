@@ -23,6 +23,8 @@ from thoracicnet.generate_label import *
 import thoracicnet.config as cfg
 
 
+class_num = cfg.CLASS_NUM
+
 try:
 	from StringIO import StringIO  # Python 2.7
 except ImportError:
@@ -99,7 +101,7 @@ class LogPredG(keras.callbacks.TensorBoard):
 		loss1,loss2,loss3 = 0,0,0
 		bz = img_vis.shape[0]
 		for i in range(bz):
-			for j in range(14):
+			for j in range(class_num):
 				_loss1,_loss2,_loss3 = self.thoracic_loss(x[0][i,:,:,j],x[1][i,j],x[2][i,j],x[3][i,j])
 				loss1 += _loss1
 				loss2 += _loss2
@@ -219,7 +221,7 @@ class LogPredG(keras.callbacks.TensorBoard):
 		img_summaries = []
 
 		# writer.add_summary(value=[tf.Summary.Value(tag='pred', simple_value=y_pred[0][:10])])
-		for i in range(14):
+		for i in range(class_num):
 			try:
 				s = StringIO()
 			except:

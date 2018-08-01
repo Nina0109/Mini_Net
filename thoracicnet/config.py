@@ -47,3 +47,4 @@ disease2id = {'No Finding':0,'Atelectasis':1,'Cardiomegaly':2,
 
 
 CLASS_NUM = 2
+INPUT_SCALE = 512

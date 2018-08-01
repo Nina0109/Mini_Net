@@ -13,7 +13,7 @@ from keras import regularizers
 from thoracicnet.thoracicloss import lossLayer
 import numpy as np
 
-import config as cfg
+import thoracicnet.config as cfg
 
 def thoracic_prob(input_img):
 	# input_img = Input(tensor=input_tensor, shape=input_shape)
