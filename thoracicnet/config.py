@@ -21,7 +21,7 @@ PROJECT_ROOT = os.path.abspath('./')
 DATA_PATH = os.path.join(PROJECT_ROOT,'data')    
 
 TRAIN_SAMPLE_LIST = os.path.join(DATA_PATH,'train_test.txt')
-VAL_SAMPLE_LIST = os.path.join(DATA_PATH,'train_test.txt')
+VAL_SAMPLE_LIST = os.path.join(DATA_PATH,'val_test.txt')
 TRAIN_VAL_SAMPLE_LIST = os.path.join(DATA_PATH,'train_val_list.txt')
 
 DATA_ENTRY_PATH = os.path.join(DATA_PATH,'Data_Entry_2017.csv')

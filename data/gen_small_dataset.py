@@ -54,13 +54,16 @@ def select_small_set():
 
 	select_train = []
 	select_val = []
+	select_test = []
 
 	for i in range(1,2):
 		select_train += tmp[i][:200]
 		select_val += tmp[i][-50:]
+		select_test += tmp[i][-100:-50]
 
 	shuffle(select_train)
 	shuffle(select_val)
+	shuffle(select_test)
 
 	with open('train_test.txt','w') as f:
 		for item in select_train:
@@ -71,6 +74,11 @@ def select_small_set():
 		for item in select_val:
 			item = item.strip().split(',')[0]+'\n'
 			f.write(item)
+
+	with open('test_test.txt','w') as f:
+		for item in select_test:
+			item = item.strip().split(',')[0]+'\n'
+			f.write(item)	
 
 
 
